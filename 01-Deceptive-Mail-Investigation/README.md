@@ -84,6 +84,17 @@ This established that the phishing attempt resulted in user interaction
 with the malicious content.
 
 ---
+## Investigation Methodology
+
+The investigation followed a structured alert-triage process:
+
+1. Reviewed the alert metadata and email details.
+2. Examined the sender, recipient, subject, and delivery status.
+3. Identified the URL contained in the email.
+4. Analyzed the referenced file using security analysis platforms.
+5. Reviewed log and process activity to determine whether the recipient interacted with the malicious content.
+6. Correlated the observed activity to determine whether the alert was a true positive.
+7. Reviewed the containment and email-removal actions taken in response.
 
 ## Investigation Timeline
 
