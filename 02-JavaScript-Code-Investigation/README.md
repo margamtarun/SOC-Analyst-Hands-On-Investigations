@@ -104,38 +104,23 @@ evidence of successful exploitation was identified.
 
 ### 1. Initial Alert
 
-![Initial Ticket](evidence/01-initial-alert.png)
-
-The initial alert identifies the SOC166 detection, source IP, destination IP,
-requested URL, hostname, HTTP method, severity, and MITRE ATT&CK technique.
+![Initial Ticket](evidence/Inital%20Ticket%20with%20information.png)
 
 ### 2. Malicious XSS Request
 
-![Malicious XSS Request](evidence/02-malicious-xss-request.png)
-
-The requested URL contains JavaScript code within the `q` parameter,
-providing evidence of the XSS attack attempt.
+![Malicious XSS Request](evidence/Malicious%20Link.png)
 
 ### 3. Collected Artifacts
 
-![Artifacts](evidence/03-artifacts.png)
-
-The source and destination IP addresses were documented as investigation
-artifacts.
+![Artifacts](evidence/Artifacts.png)
 
 ### 4. Analyst Notes
 
-![Analyst Notes](evidence/04-analyst-notes.png)
-
-The analyst assessment documents the investigation findings and explains
-why the attack was determined to be unsuccessful.
+![Analyst Notes](evidence/Analyst%20Notes%20.png)
 
 ### 5. Final Case Result
 
-![True Positive](evidence/05-true-positive.png)
-
-The case was submitted as a True Positive after completing the investigation.
-
+![True Positive](evidence/True%20positive%20alert%20.png)
 ---
 
 ## Skills Demonstrated
