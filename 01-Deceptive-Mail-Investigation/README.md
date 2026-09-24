@@ -68,7 +68,7 @@ email was treated as a suspicious indicator and required further analysis.
 The URL and associated file were analyzed using security analysis
 platforms.
 
-The analysis determined that the referenced attachment was malicious.
+The analysis determined that the referenced file was malicious.
 
 This confirmed that the email was not simply suspicious or unsolicited;
 it contained malicious content.
