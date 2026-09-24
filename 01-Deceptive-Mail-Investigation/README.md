@@ -110,6 +110,7 @@ The investigation followed a structured alert-triage process:
 | 8 | Device was contained |
 | 9 | Malicious email was deleted |
 
+
 ## Evidence
 
 ### 1. Alert Overview
