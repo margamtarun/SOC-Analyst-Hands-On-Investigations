@@ -56,7 +56,7 @@ The URL referenced a ZIP file:
 
 The URL was:
 
-`https://files-ld.s3.us-east-2.amazonaws.com/59cbd215-76ea-434d-93ca-4d6aec3bac98-free-coffee.zip`
+https://files-ld.s3.us-east-2.amazonaws.com/59cbd215-76ea-434d-93ca-4d6aec3bac98-free-coffee.zip
 
 The presence of a downloadable ZIP file within a deceptive promotional
 email was treated as a suspicious indicator and required further analysis.
