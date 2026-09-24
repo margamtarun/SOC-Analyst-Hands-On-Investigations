@@ -110,6 +110,39 @@ The investigation followed a structured alert-triage process:
 | 8 | Device was contained |
 | 9 | Malicious email was deleted |
 
+## Evidence
+
+### 1. Alert Overview
+
+The initial alert identified a suspicious phishing email sent to the
+recipient. The alert provided the sender, recipient, subject, SMTP
+address, and delivery action.
+
+![Alert Overview](evidence/01-alert-overview.png)
+
+### 2. Email and Malicious URL
+
+The email contained a suspicious URL pointing to a ZIP file. The
+message used a free coffee offer as a lure.
+
+![Email Details and URL](evidence/02-email-details-and-url.png)
+
+### 3. C2 and Process Activity
+
+Log and process activity showed that the affected host accessed the
+malicious content and that `Coffee.exe` communicated with the identified
+C2 address.
+
+![C2 and Process Evidence](evidence/04-c2-and-process-evidence.png)
+
+### 4. Containment
+
+After confirming the malicious activity, the affected host was
+contained and the malicious email was removed from the recipient's
+mailbox.
+
+![Containment Evidence](evidence/05-containment-evidence.png)
+
 ---
 
 ## Indicators of Interest
