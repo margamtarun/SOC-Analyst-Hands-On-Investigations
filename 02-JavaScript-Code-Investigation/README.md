@@ -1,115 +1,163 @@
-# Case #2 – JavaScript Code Investigation
+# Case #2 – JavaScript Code / Reflected XSS Investigation
+
+## Case Overview
+
+This investigation involved a SOC alert for JavaScript code detected within a
+requested URL. The investigation was performed using the LetsDefend SOC
+environment and focused on determining the attack type, source, destination,
+whether the activity was malicious, and whether the attack was successful.
+
+The investigation identified a reflected Cross-Site Scripting (XSS) attack
+attempt against a public-facing web server. Log analysis showed that the
+malicious request received an HTTP 302 redirect with a 0-byte response, and
+no evidence of successful exploitation was identified.
+
+---
 
 ## Alert Information
 
 | Field | Details |
 |---|---|
-| Alert | SOC166 – Javascript Code Detected in Requested URL |
+| Alert | SOC166 - Javascript Code Detected in Requested URL |
 | Event ID | 116 |
 | Severity | Medium |
 | Alert Type | Web Attack |
-| Result | True Positive |
-| Attack Type | Reflected XSS |
+| Hostname | WebServer1002 |
+| MITRE ATT&CK | T1190 - Exploit Public-Facing Application |
 | Source IP | 112.85.42.13 |
 | Destination IP | 172.16.17.17 |
-| Hostname | WebServer1002 |
 | HTTP Method | GET |
-| MITRE ATT&CK | T1190 – Exploit Public-Facing Application |
+| Attack Type | Reflected XSS |
+| Final Result | True Positive |
+| Attack Outcome | Unsuccessful |
 
 ---
 
-## Investigation Summary
+## Investigation Process
 
-Investigated a JavaScript/XSS attack attempt against the web server
-`172.16.17.17`.
+### 1. Alert Review
 
-The investigation identified multiple XSS payloads originating from
-`112.85.42.13`. The payloads were delivered through the `q` parameter
-of HTTP GET requests, indicating a reflected XSS attack.
+The initial alert showed JavaScript code detected within a requested URL
+targeting the web server `172.16.17.17`.
 
-The requests received HTTP 302 redirects, and the investigation determined
-that the attack was unsuccessful.
+The request originated from `112.85.42.13` and used the HTTP GET method.
+
+### 2. Malicious Request Analysis
+
+The requested URL contained a JavaScript payload within the `q` parameter:
+
+`https://172.16.17.17/search/?q=<$script>javascript:$alert(1)</$script>`
+
+The presence of JavaScript code in the URL indicated an attempted
+Cross-Site Scripting (XSS) attack.
+
+### 3. Log Investigation
+
+The source IP address `112.85.42.13` was searched in Log Management.
+
+Multiple requests from the same source IP were identified targeting
+`172.16.17.17:443`, confirming repeated activity rather than a single
+isolated request.
+
+### 4. Attack Outcome Analysis
+
+The malicious request was examined in the raw log data.
+
+The request showed:
+
+- Device Action: Permitted
+- HTTP Method: GET
+- HTTP Response Size: 0
+- HTTP Response Status: 302
+
+The HTTP 302 response indicated that the request was redirected. Combined
+with the 0-byte response and the absence of evidence showing successful
+payload execution, the attack was determined to be unsuccessful.
+
+### 5. Artifact Collection
+
+The following artifacts were documented during the investigation:
+
+| Artifact | Type | Description |
+|---|---|---|
+| `112.85.42.13` | IP Address | Source IP associated with the XSS activity |
+| `172.16.17.17` | IP Address | Destination web server targeted by the attack |
 
 ---
 
-## Investigation Findings
+## Analyst Assessment
 
-### 1. Initial Alert
+The investigation confirmed malicious web traffic containing an XSS payload
+in the `q` parameter of a GET request.
 
-The alert identified JavaScript code in a requested URL targeting the
-web server `172.16.17.17`.
+The activity was classified as a reflected XSS attack attempt originating
+from `112.85.42.13` and targeting `WebServer1002` (`172.16.17.17`).
 
-### 2. Malicious XSS Payload
+The request received an HTTP 302 redirect with a 0-byte response, and no
+evidence of successful exploitation was identified.
 
-The requested URL contained JavaScript/XSS code within the `q` parameter.
-
-Example payloads observed during the investigation included:
-
-- `prompt(8)`
-- `<img src=q onerror=prompt(8)>`
-- `<svg><script>...`
-- Other JavaScript payload variations
-
-### 3. Source IP Investigation
-
-Filtering the logs by source IP `112.85.42.13` revealed multiple requests
-containing different XSS payloads targeting the same web server.
-
-This confirmed that the activity was not an isolated request.
-
-### 4. Attack Result
-
-The HTTP requests received a `302` response.
-
-Based on the available log evidence and the completed LetsDefend investigation,
-the XSS attack attempt was determined to be unsuccessful.
+**Final Assessment: True Positive — Unsuccessful XSS Attack Attempt**
 
 ---
 
 ## Evidence
 
-### Alert Overview
+### 1. Initial Alert
 
-![Alert Overview](evidence/01-alert-overview.png)
+![Initial Ticket](evidence/01-initial-alert.png)
 
-### XSS Payload
+The initial alert identifies the SOC166 detection, source IP, destination IP,
+requested URL, hostname, HTTP method, severity, and MITRE ATT&CK technique.
 
-![XSS Payload](evidence/02-xss-request.png)
+### 2. Malicious XSS Request
 
-### Multiple XSS Attempts
+![Malicious XSS Request](evidence/02-malicious-xss-request.png)
 
-![Multiple XSS Payloads](evidence/03-multiple-xss-payloads.png)
+The requested URL contains JavaScript code within the `q` parameter,
+providing evidence of the XSS attack attempt.
 
-### HTTP 302 Response
+### 3. Collected Artifacts
 
-![HTTP 302 Response](evidence/04-http-302-response.png)
+![Artifacts](evidence/03-artifacts.png)
 
----
+The source and destination IP addresses were documented as investigation
+artifacts.
 
-## Investigation Outcome
+### 4. Analyst Notes
 
-**Verdict: True Positive – Unsuccessful Reflected XSS Attack Attempt**
+![Analyst Notes](evidence/04-analyst-notes.png)
 
-The investigation identified multiple malicious XSS payloads originating
-from `112.85.42.13` and targeting `172.16.17.17`.
+The analyst assessment documents the investigation findings and explains
+why the attack was determined to be unsuccessful.
 
-The activity was confirmed as a reflected XSS attack attempt. The requests
-were redirected with HTTP 302 responses, and the attack was determined to
-be unsuccessful.
+### 5. Final Case Result
 
-**LetsDefend Playbook Score: 100%**
+![True Positive](evidence/05-true-positive.png)
+
+The case was submitted as a True Positive after completing the investigation.
 
 ---
 
 ## Skills Demonstrated
 
-- SOC Alert Investigation
-- Web Attack Analysis
-- XSS Detection
+- SOC Alert Triage
+- Web Attack Investigation
+- Cross-Site Scripting (XSS) Analysis
 - Reflected XSS Identification
-- Log Analysis
-- Source IP Investigation
 - HTTP Request Analysis
 - HTTP Response Analysis
+- Log Management
+- Source IP Investigation
+- IOC / Artifact Collection
 - MITRE ATT&CK Mapping
-- Security Alert Triage
+- Security Alert Documentation
+- True Positive / False Positive Analysis
+
+---
+
+## Investigation Environment
+
+**Platform:** LetsDefend  
+**Role:** Security Analyst  
+**Alert:** SOC166 - Javascript Code Detected in Requested URL  
+**MITRE ATT&CK:** T1190 - Exploit Public-Facing Application
