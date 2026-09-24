@@ -56,7 +56,7 @@ The URL referenced a ZIP file:
 
 The URL was:
 
-`https://files-ld3.s3.us-east-2.amazonaws.com/free-coffee.zip`
+`https://files-ld.s3.us-east-2.amazonaws.com/59cbd215-76ea-434d-93ca-4d6aec3bac98-free-coffee.zip`
 
 The presence of a downloadable ZIP file within a deceptive promotional
 email was treated as a suspicious indicator and required further analysis.
@@ -155,7 +155,10 @@ mailbox.
 | Subject | Free Coffee Voucher |
 | SMTP Address | 103.80.134.63 |
 | Malicious File | Free_coffee.zip |
-| Destination | files-ld3.s3.us-east-2.amazonaws.com |
+| Malicious URL | `https://files-ld.s3.us-east-2.amazonaws.com/59cbd215-76ea-434d-93ca-4d6aec3bac98-free-coffee.zip` |
+| C2 IP | 37.120.233.226 |
+| Malware | Coffee.exe |
+| SHA-256 | `CD903AD2211CF7D166646D75E57FB866000F4A3B870B5EC759929BE2FD81D334` |
 
 ---
 
