@@ -97,7 +97,7 @@ The case was mapped to:
 
 ### 2. LFI Request
 
-![LFI Request](evidence/02-lfi-request.png)
+![Initial Alert](evidence/01-initial-alert.png)
 
 ### 3. Log Evidence
 
