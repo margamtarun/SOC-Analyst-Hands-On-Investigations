@@ -93,11 +93,11 @@ The case was mapped to:
 
 ### 1. Initial Alert
 
-04-LFI-Investigation/evidence/01-initial-alert.png.png
+![Initial Alert](evidence/01-initial-alert.png)
 
 ### 2. LFI Request
 
-![Initial Alert](evidence/01-initial-alert.png)
+![LFI Request](evidence/02-lfi-request.png)
 
 ### 3. Log Evidence
 
