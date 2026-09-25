@@ -4,7 +4,7 @@
 
 This investigation involved a web attack alert triggered by a possible SQL Injection payload detected in a requested URL.
 
-The investigation focused on analyzing the requested URL, decoding the payload, reviewing related requests from the same source IP, and examining the HTTP response behavior to determine whether the SQL Injection attack was successful.
+The investigation focused on analyzing the requested URL, identifying and decoding the SQL Injection payload, reviewing related requests from the same source IP, and examining HTTP response behavior to determine whether the attack was successful.
 
 The investigation confirmed a True Positive SQL Injection attack attempt. The traffic was malicious, but the attack was determined to be unsuccessful.
 
@@ -28,7 +28,7 @@ The investigation confirmed a True Positive SQL Injection attack attempt. The tr
 | Attack Successful | No |
 | Tier 2 Escalation | No |
 | Result | True Positive |
-| MITRE ATT&CK | T1190 - Exploit Public-Facing Application |
+| MITRE ATT&CK | T1190 |
 
 ## Investigation Process
 
@@ -56,29 +56,29 @@ The traffic was classified as malicious and was determined not to be part of a p
 
 The requested URL contained an encoded SQL Injection payload.
 
-The observed request included:
+The observed request included the following encoded content:
 
 `q=%22%20OR%201%20%3D%201%20-%20`
 
-After URL decoding, the payload was identified as an SQL Injection attempt.
+After URL decoding, the payload was identified as an SQL Injection attempt containing an `OR 1=1` pattern.
 
-The alert was triggered because the requested URL contained an `OR 1=1` pattern.
+The alert was triggered because the requested URL contained the SQL Injection pattern.
 
 ### 3. Log Management Investigation
 
-The source IP `167.99.169.17` was used to filter related requests in Log Management.
+The source IP `167.99.169.17` was used to identify related requests in Log Management.
 
 Multiple requests associated with the same source IP were identified.
 
-The requests were related to the same SQL Injection vulnerability and targeted the same destination web server.
+The requests were related to the SQL Injection vulnerability and targeted the same destination web server.
 
-This confirmed that the activity was not an isolated alert and that the source was making multiple SQL Injection attempts.
+This confirmed that the activity consisted of multiple related SQL Injection attempts rather than an isolated request.
 
 ### 4. HTTP Response Analysis
 
 The HTTP responses for the related requests were examined.
 
-The observed requests returned:
+The observed requests showed:
 
 - HTTP Method: `GET`
 - Device Action: `Permitted`
@@ -87,7 +87,7 @@ The observed requests returned:
 
 Multiple SQL Injection requests produced the same response behavior.
 
-The repeated HTTP `500` responses and identical response sizes did not provide evidence of successful exploitation.
+The repeated HTTP `500` responses and consistent response size did not provide evidence of successful exploitation.
 
 ### 5. Attack Outcome
 
@@ -108,13 +108,15 @@ The device was successfully contained.
 
 The investigation confirmed a **True Positive SQL Injection attack attempt** against `WebServer1001` (`172.16.17.18`).
 
-The attacker from `167.99.169.17` sent SQL Injection payloads through the search endpoint.
+The attacker from `167.99.169.17` sent SQL Injection payloads through the `/search/` endpoint.
 
-After decoding the requested URL, the payload was confirmed as SQL Injection activity.
+After URL decoding, the payload was confirmed as SQL Injection activity.
 
-Multiple related requests were identified from the same source IP. The requests consistently returned HTTP `500` responses with the same response size of `948`.
+Multiple related requests were identified from the same source IP. The requests consistently returned HTTP `500` responses with a response size of `948`.
 
 Based on the observed response behavior, the SQL Injection attack was determined to be unsuccessful.
+
+The device was successfully contained and the incident did not require Tier 2 escalation.
 
 ## MITRE ATT&CK
 
@@ -150,29 +152,25 @@ The case was mapped to:
 
 ![Investigation Result](evidence/02-investigation-result.png)
 
-### 3. SQL Injection Details
+### 3. Analyst Assessment
 
-![SQL Injection Details](evidence/03-sql-injection-details.png)
+![Analyst Assessment](evidence/03-analyst-assessment.png)
 
 ### 4. Attack Indicators
 
 ![Attack Indicators](evidence/04-attack-indicators.png)
 
-### 5. Raw Log Evidence 1
+### 5. Raw Log Evidence – SQL Injection Request 1
 
 ![Raw Log Evidence 1](evidence/05-raw-log-evidence-1.png)
 
-### 6. Raw Log Evidence 2
+### 6. Raw Log Evidence – SQL Injection Request 2
 
-![Raw Log Evidence 2](evidence/05-raw-log-evidence-2.png)
+![Raw Log Evidence 2](evidence/06-raw-log-evidence-2.png)
 
-### 7. Raw Log Evidence 3
+### 7. Raw Log Evidence – SQL Injection Request 3
 
-![Raw Log Evidence 3](evidence/05-raw-log-evidence-3.png)
-
-### 8. Final Case Result
-
-![Final Case Result](evidence/06-final-result.png)
+![Raw Log Evidence 3](evidence/07-raw-log-evidence-3.png)
 
 ## Skills Demonstrated
 
@@ -184,7 +182,7 @@ The case was mapped to:
 - Log correlation
 - IOC identification
 - Attack outcome determination
-- False exploitation assessment
+- Incident containment analysis
 - Incident classification
 - MITRE ATT&CK mapping
 - Security incident documentation
