@@ -61,7 +61,7 @@ The available proxy evidence confirms that the malicious requests reached the ta
 ## Evidence
 
 ### 1. Initial Alert
-![Initial Alert](evidence/01-initial-alert.png)
+01-initial-alert.png
 
 ### 2. Alert Verification
 ![Alert Verification](evidence/02-alert-verification.png)
