@@ -89,9 +89,11 @@ The case was mapped to:
 
 ## Evidence
 
+## Evidence
+
 ### 1. Initial Alert
 
-01-initial-alert.png
+![Initial Alert](evidence/01-initial-alert.png)
 
 ### 2. LFI Request
 
@@ -108,7 +110,6 @@ The case was mapped to:
 ### 5. Final Case Result
 
 ![Final Case Result](evidence/05-final-result.png)
-
 ## Skills Demonstrated
 
 - SIEM / Log Management investigation
