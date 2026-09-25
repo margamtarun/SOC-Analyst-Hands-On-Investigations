@@ -93,7 +93,7 @@ The case was mapped to:
 
 ### 1. Initial Alert
 
-![Initial Alert](evidence/01-initial-alert.png)
+04-LFI-Investigation/evidence/01-initial-alert.png.png
 
 ### 2. LFI Request
 
