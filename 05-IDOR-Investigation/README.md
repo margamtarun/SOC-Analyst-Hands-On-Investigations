@@ -132,26 +132,25 @@ The case was mapped to:
 
 ![Initial Alert](evidence/01-initial-alert.png)
 
-### 2. Log Evidence – User ID 1
-
-![Log User 1](evidence/04-log-user1.png)
-
-### 3. Log Evidence – User ID 2
-
-![Log User 2](evidence/05-log-user2.png)
-
-### 4. Log Evidence – User ID 3
-
-![Log User 3](evidence/06-log-user3.png)
-
-### 5. Log Evidence – User ID 4
-
-![Log User 4](evidence/03-log-user4.png)
-
-### 6. IDOR Request – User ID 5
+### 2. IDOR Request – User ID 5
 
 ![IDOR Request User 5](evidence/02-idor-request-user5.png)
 
+### 3. Log Evidence – User ID 4
+
+![Log User 4](evidence/03-log-user4.png)
+
+### 4. Log Evidence – User ID 1
+
+![Log User 1](evidence/04-log-user1.png)
+
+### 5. Log Evidence – User ID 2
+
+![Log User 2](evidence/05-log-user2.png)
+
+### 6. Log Evidence – User ID 3
+
+![Log User 3](evidence/06-log-user3.png)
 
 ### 7. Analyst Assessment
 
